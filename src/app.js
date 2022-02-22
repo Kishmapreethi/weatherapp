@@ -19,6 +19,7 @@ app.use(express.static(publicDirectoryPath));
 
 hbs.registerPartials(partialPath);
 
+//API to find weather.
 app.get('/api/weather', function (req, res) {
     if (!req.query.city) {
         res.status(200).send("Pls Enter city");
@@ -31,6 +32,8 @@ app.get('/api/weather', function (req, res) {
     })
 })
 
+
+//Rendering Pages
 app.get("/help", function (req, res) {
     res.render("help", {
         title: "Help Page"

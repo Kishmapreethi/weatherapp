@@ -1,0 +1,1 @@
+The app to find forecast for given city.
