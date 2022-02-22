@@ -22,11 +22,19 @@ hbs.registerPartials(partialPath);
 //API to find weather.
 app.get('/api/weather', function (req, res) {
     if (!req.query.city) {
-        res.status(200).send("Pls Enter city");
+        res.status(400).send("Pls Enter city");
         return;
     }
-    geocode(req.query.city, function (data) {
-        forecast(data, function (result) {
+    geocode(req.query.city, function (error, data) {
+        if (error) {
+            res.status(500).send("Internal server error");
+            return;
+        }
+        forecast(data, function (error, result) {
+            if (error) {
+                res.status(500).send("Internal server error");
+                return;
+            }
             res.status(200).send(result)
         })
     })
